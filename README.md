@@ -1,5 +1,5 @@
 # Application-d-affectation-de-salles-de-TP
-Cet Application doit permettre :
+Cette application permet :
 1. L’ajout, la modification ou la suppression de salles et d’enseignants.
 2. La gestion d’affectations, avec un nombre d’affectations maximum (par semaine) et des jours de maintenance et de nettoyage.
 3. L’interrogation de la base de données pour afficher :
