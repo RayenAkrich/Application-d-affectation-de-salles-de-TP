@@ -1,6 +1,6 @@
 -- create
 CREATE TABLE enseignant (
-id_ens integer PRIMARY KEY,
+cin integer PRIMARY KEY,
 nom varchar(10),
 prenom varchar(10),
 specialite varchar(20),
@@ -30,7 +30,7 @@ FOREIGN KEY (id_ens) REFERENCES enseignant(id_ens),
 FOREIGN KEY (id_salle) REFERENCES salle(id_salle)
 );
 CREATE TABLE user (
-id_user integer PRIMARY KEY,
+cin integer PRIMARY KEY,
 nom VARCHAR(20),
 prenom VARCHAR(20),
 email VARCHAR(100) UNIQUE,
