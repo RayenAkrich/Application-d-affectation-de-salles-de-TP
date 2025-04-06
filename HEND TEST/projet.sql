@@ -66,3 +66,4 @@ INSERT INTO user VALUES ('15328795','yacoub','hend','hend.yacoub@etudiant-fst.ut
 INSERT INTO user VALUES ('06538247','hamam','mootaz','mootaz.hamam@etudiant-fst.utm.tn','10100145','admin','2025-04-04');
 INSERT INTO user VALUES ('11542354','hajji','mohamed amine','amine.hajji@etudiant-fst.utm.tn','1010015458','admin','2025-04-04');
 INSERT INTO user VALUES ('06587235','akrich','rayen','rayen.akrich@etudiant-fst.utm.tn','101005468','admin','2025-04-04');
+INSERT INTO user VALUES ('12345678','normal','user','normaluser@etudiant-fst.utm.tn','123456789','user','2025-04-06');
