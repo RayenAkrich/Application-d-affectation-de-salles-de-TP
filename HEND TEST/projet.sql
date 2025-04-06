@@ -19,14 +19,14 @@ num_salle integer,
 FOREIGN KEY (num_salle) REFERENCES salle(id_salle)
 );
 CREATE TABLE affectation(
-id_affect integer PRIMARY KEY,
+id_affect integer PRIMARY KEY AUTO_INCREMENT,
 id_ens integer ,
 id_salle integer,
 jour varchar(10),
 heure_deb integer ,
 heure_fin integer ,
 nbre_etud integer,
-FOREIGN KEY (id_ens) REFERENCES enseignant(cin)
+FOREIGN KEY (id_ens) REFERENCES enseignant(cin),
 FOREIGN KEY (id_salle) REFERENCES salle(id_salle)
 );
 CREATE TABLE user (
@@ -59,7 +59,7 @@ INSERT INTO maintenance (jour, num_salle) VALUES ('jeudi',3);
 INSERT INTO maintenance (jour, num_salle) VALUES ('vendredi',3);
 
 -- insert affectation 
-INSERT INTO affectation VALUES (1,1,2,'mercredi',8,10,30);
+INSERT INTO affectation (id_ens,id_salle,jour,heure_deb,heure_fin,nbre_etud) VALUES (1,2,'mercredi',8,10,15);
 -- insert users
 INSERT INTO user VALUES (1,'yacoub','hend','hend.yacoub@etudiant-fst.utm.tn','10100123','admin','04-04-2025');
 INSERT INTO user VALUES (2,'hamam','mootaz','mootaz.hamam@etudiant-fst.utm.tn','10100145','admin','04-04-2025');
