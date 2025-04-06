@@ -30,7 +30,7 @@ nbre_etud integer,
 FOREIGN KEY (id_ens) REFERENCES enseignant(cin),
 FOREIGN KEY (id_salle) REFERENCES salle(id_salle)
 );
-CREATE TABLE user (
+CREATE TABLE users (
 cin VARCHAR(8) PRIMARY KEY,
 nom VARCHAR(20),
 prenom VARCHAR(20),
@@ -61,9 +61,9 @@ INSERT INTO maintenance (jour, num_salle) VALUES ('vendredi',3);
 
 -- insert affectation 
 INSERT INTO affectation (id_ens,id_salle,jour,heure_deb,heure_fin,nbre_etud) VALUES (1,2,'mercredi',8,10,15);
--- insert user
-INSERT INTO user VALUES ('15328795','yacoub','hend','hend.yacoub@etudiant-fst.utm.tn','10100123','admin','2025-04-04');
-INSERT INTO user VALUES ('06538247','hamam','mootaz','mootaz.hamam@etudiant-fst.utm.tn','10100145','admin','2025-04-04');
-INSERT INTO user VALUES ('11542354','hajji','mohamed amine','amine.hajji@etudiant-fst.utm.tn','1010015458','admin','2025-04-04');
-INSERT INTO user VALUES ('06587235','akrich','rayen','rayen.akrich@etudiant-fst.utm.tn','101005468','admin','2025-04-04');
-INSERT INTO user VALUES ('12345678','normal','user','normaluser@etudiant-fst.utm.tn','123456789','user','2025-04-06');
+-- insert users
+INSERT INTO users VALUES ('15328795','yacoub','hend','hend.yacoub@etudiant-fst.utm.tn','10100123','admin','2025-04-04');
+INSERT INTO users VALUES ('06538247','hamam','mootaz','mootaz.hamam@etudiant-fst.utm.tn','10100145','admin','2025-04-04');
+INSERT INTO users VALUES ('11542354','hajji','mohamed amine','amine.hajji@etudiant-fst.utm.tn','1010015458','admin','2025-04-04');
+INSERT INTO users VALUES ('06587235','akrich','rayen','rayen.akrich@etudiant-fst.utm.tn','101005468','admin','2025-04-04');
+INSERT INTO users VALUES ('12345678','normal','user','normaluser@etudiant-fst.utm.tn','123456789','user','2025-04-06');
