@@ -23,8 +23,8 @@ id_affect integer PRIMARY KEY,
 id_ens integer ,
 id_salle integer,
 jour varchar(10),
-heure_deb TIME,
-heure_fin TIME,
+heure_deb integer ,
+heure_fin integer ,
 nbre_etud integer,
 FOREIGN KEY (id_ens) REFERENCES enseignant(cin)
 FOREIGN KEY (id_salle) REFERENCES salle(id_salle)
