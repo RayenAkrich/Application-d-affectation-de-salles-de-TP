@@ -23,10 +23,10 @@ id_affect integer PRIMARY KEY,
 id_ens integer ,
 id_salle integer,
 jour varchar(10),
-heure_deb integer,
-heure_fin integer,
+heure_deb TIME,
+heure_fin TIME,
 nbre_etud integer,
-FOREIGN KEY (id_ens) REFERENCES enseignant(id_ens),
+FOREIGN KEY (id_ens) REFERENCES enseignant(cin)
 FOREIGN KEY (id_salle) REFERENCES salle(id_salle)
 );
 CREATE TABLE user (
@@ -52,19 +52,19 @@ INSERT INTO salle VALUES (2,'S2',40,15);
 INSERT INTO salle VALUES (3,'SE2B',45,20);
 INSERT INTO salle VALUES (4,'SE4B',40,18);
 -- insert maintenance
-INSERT INTO maintenance VALUES (1,'lundi',1);
-INSERT INTO maintenance VALUES (2,'mardi',1);
-INSERT INTO maintenance VALUES (3,'mercredi',2);
-INSERT INTO maintenance VALUES (4,'jeudi',3);
-INSERT INTO maintenance VALUES (5,'vendredi',3);
+INSERT INTO maintenance (jour, num_salle) VALUES ('lundi',1);
+INSERT INTO maintenance (jour, num_salle) VALUES ('mardi',1);
+INSERT INTO maintenance (jour, num_salle) VALUES ('mercredi',2);
+INSERT INTO maintenance (jour, num_salle) VALUES ('jeudi',3);
+INSERT INTO maintenance (jour, num_salle) VALUES ('vendredi',3);
 
 -- insert affectation 
 INSERT INTO affectation VALUES (1,1,2,'mercredi',8,10,30);
 -- insert users
-INSERT INTO user VALUES (1,'yacoub','hend','hend.yacoub@etudiant-fst.utm.tn','10100123','admin',04-04-2025);
-INSERT INTO user VALUES (2,'hamam','mootaz','mootaz.hamam@etudiant-fst.utm.tn','10100145','admin',04-04-2025);
-INSERT INTO user VALUES (3,'hajji',"mohamed amine",'amine.hajji@etudiant-fst.utm.tn','1010015458','admin',04-04-2025);
-INSERT INTO user VALUES (4,'akrich','rayen','rayen.akrich@etudiant-fst.utm.tn','101005468','admin',04-04-2025);
+INSERT INTO user VALUES (1,'yacoub','hend','hend.yacoub@etudiant-fst.utm.tn','10100123','admin','04-04-2025');
+INSERT INTO user VALUES (2,'hamam','mootaz','mootaz.hamam@etudiant-fst.utm.tn','10100145','admin','04-04-2025');
+INSERT INTO user VALUES (3,'hajji','mohamed amine','amine.hajji@etudiant-fst.utm.tn','1010015458','admin','04-04-2025');
+INSERT INTO user VALUES (4,'akrich','rayen','rayen.akrich@etudiant-fst.utm.tn','101005468','admin','04-04-2025');
 
 
 
