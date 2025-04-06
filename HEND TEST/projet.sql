@@ -61,10 +61,10 @@ INSERT INTO maintenance (jour, num_salle) VALUES ('vendredi',3);
 -- insert affectation 
 INSERT INTO affectation (id_ens,id_salle,jour,heure_deb,heure_fin,nbre_etud) VALUES (1,2,'mercredi',8,10,15);
 -- insert users
-INSERT INTO user VALUES (1,'yacoub','hend','hend.yacoub@etudiant-fst.utm.tn','10100123','admin','04-04-2025');
-INSERT INTO user VALUES (2,'hamam','mootaz','mootaz.hamam@etudiant-fst.utm.tn','10100145','admin','04-04-2025');
-INSERT INTO user VALUES (3,'hajji','mohamed amine','amine.hajji@etudiant-fst.utm.tn','1010015458','admin','04-04-2025');
-INSERT INTO user VALUES (4,'akrich','rayen','rayen.akrich@etudiant-fst.utm.tn','101005468','admin','04-04-2025');
+INSERT INTO user VALUES (15328795,'yacoub','hend','hend.yacoub@etudiant-fst.utm.tn','10100123','admin','04-04-2025');
+INSERT INTO user VALUES (06538247,'hamam','mootaz','mootaz.hamam@etudiant-fst.utm.tn','10100145','admin','04-04-2025');
+INSERT INTO user VALUES (11542354,'hajji','mohamed amine','amine.hajji@etudiant-fst.utm.tn','1010015458','admin','04-04-2025');
+INSERT INTO user VALUES (06587235,'akrich','rayen','rayen.akrich@etudiant-fst.utm.tn','101005468','admin','04-04-2025');
 
 
 
