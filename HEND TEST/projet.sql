@@ -42,28 +42,63 @@ date_inscription DATETIME DEFAULT CURRENT_TIMESTAMP
 
 
 -- insert enseignant
-INSERT INTO enseignant VALUES (1, 'hamam', 'maha','maths',8);
-INSERT INTO enseignant VALUES (2, 'aisaoui', 'karim','electrostatique',10);
-INSERT INTO enseignant VALUES (3, 'ayari', 'mariem','electronique',10);
-INSERT INTO enseignant VALUES (4,'fathalah','imen','programmation',9);
-INSERT INTO enseignant VALUES (5,'hajji','fethi','français',7);
+INSERT INTO enseignant VALUES 
+('09876543', 'Dupont', 'Émilie', 'Physique', 9),
+('11223344', 'Martin', 'Luc', 'Chimie', 7),
+('02345678', 'Leroy', 'Sophie', 'Biologie', 10),
+('14567892', 'Garcia', 'Carlos', 'Informatique', 8),
+('08765432', 'Dubois', 'Annie', 'Mathématiques', 12),
+('13245768', 'Karam', 'Nour', 'Électronique', 6),
+('01234587', 'O''Connor', 'Sean', 'Mécanique', 11),
+('18765439', 'Al-Farsi', 'Layla', 'Thermodynamique', 9),
+('07654321', 'Van-Der', 'Maarten', 'Optique', 10),
+('15432678', 'Ben Ahmed', 'Youssef', 'Génie Civil', 7);
 -- insert salle
-INSERT INTO salle VALUES (1,'S1',30,20);
-INSERT INTO salle VALUES (2,'S2',40,15);
-INSERT INTO salle VALUES (3,'SE2B',45,20);
-INSERT INTO salle VALUES (4,'SE4B',40,18);
+INSERT INTO salle VALUES 
+(5, 'S3', 35, 25),
+(6, 'S4', 40, 30),
+(7, 'SE5A', 50, 35),
+(8, 'LAB1', 20, 15),
+(9, 'AMPHI', 100, 80),
+(10, 'S6', 30, 20),
+(11, 'SE7C', 45, 30),
+(12, 'LAB2', 25, 18),
+(13, 'VIDEO', 15, 10),
+(14, 'S8', 60, 45);
 -- insert maintenance
-INSERT INTO maintenance (jour, num_salle) VALUES ('lundi',1);
-INSERT INTO maintenance (jour, num_salle) VALUES ('mardi',1);
-INSERT INTO maintenance (jour, num_salle) VALUES ('mercredi',2);
-INSERT INTO maintenance (jour, num_salle) VALUES ('jeudi',3);
-INSERT INTO maintenance (jour, num_salle) VALUES ('vendredi',3);
+INSERT INTO maintenance (jour, num_salle) VALUES 
+('lundi', 5),
+('mardi', 6),
+('mercredi', 7),
+('jeudi', 8),
+('vendredi', 9),
+('lundi', 10),
+('mardi', 11),
+('mercredi', 12),
+('jeudi', 13),
+('vendredi', 14);
 
 -- insert affectation 
-INSERT INTO affectation (id_ens,id_salle,jour,heure_deb,heure_fin,nbre_etud) VALUES (1,2,'mercredi',8,10,15);
+INSERT INTO affectation (id_ens, id_salle, jour, heure_deb, heure_fin, nbre_etud) VALUES 
+('09876543', 5, 'lundi', 8, 10, 30),
+('11223344', 6, 'mardi', 10, 12, 25),
+('02345678', 7, 'mercredi', 13, 15, 40),
+('14567892', 8, 'jeudi', 9, 11, 12),
+('08765432', 9, 'vendredi', 14, 16, 70),
+('13245768', 10, 'lundi', 8, 11, 18),
+('01234587', 11, 'mardi', 10, 12, 35),
+('18765439', 12, 'mercredi', 15, 17, 15),
+('07654321', 13, 'jeudi', 8, 10, 8),
+('15432678', 14, 'vendredi', 13, 15, 40);
 -- insert users
-INSERT INTO users VALUES ('15328795','yacoub','hend','hend.yacoub@etudiant-fst.utm.tn','10100123','admin','2025-04-04');
-INSERT INTO users VALUES ('06538247','hamam','mootaz','mootaz.hamam@etudiant-fst.utm.tn','10100145','admin','2025-04-04');
-INSERT INTO users VALUES ('11542354','hajji','mohamed amine','amine.hajji@etudiant-fst.utm.tn','1010015458','admin','2025-04-04');
-INSERT INTO users VALUES ('06587235','akrich','rayen','rayen.akrich@etudiant-fst.utm.tn','101005468','admin','2025-04-04');
-INSERT INTO users VALUES ('12345678','normal','user','normaluser@etudiant-fst.utm.tn','123456789','user','2025-04-06');
+INSERT INTO users (cin, nom, prenom, email, mot_de_passe, role) VALUES 
+('09871234', 'yacoub', 'hend', 'hend.yacoub@etudiant-fst.utm.tn', 'SecurePass123', 'admin'),
+('11234567', 'hamam', 'mootaz', 'mootaz.hamam@etudiant-fst.utm.tn', '10100145', 'admin'),
+('02349876', 'hajji', 'mohamed amine', 'amine.hajji@etudiant-fst.utm.tn', 'Vietnam2024', 'admin'),
+('13456789', 'akriche', 'rayen', 'rayen.akrich@etudiant-fst.utm.tn', 'JS*456789', 'admin'),
+('08765432', 'Gómez', 'Ana', 'ana.gomez@example.com', 'Fl0w3rP0w3r', 'user'),
+('14567987', 'Kim', 'Min-ji', 'minji.k@example.com', 'K0re@2023', 'user'),
+('01237654', 'Müller', 'Hans', 'h.muller@example.com', 'B3rlin2025', 'user'),
+('18765439', 'Ivanova', 'Svetlana', 's.ivanova@example.com', 'Sib3ria!', 'user'),
+('07654328', 'Dubois', 'Pierre', 'p.dubois@example.com', 'Paris1234', 'user'),
+('15432679', 'Rossi', 'Giulia', 'g.rossi@example.com', 'R0ma2024#', 'user');
