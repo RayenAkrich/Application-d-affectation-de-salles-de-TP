@@ -5,10 +5,10 @@ cin VARCHAR(8) PRIMARY KEY,
 nom varchar(10),
 prenom varchar(10),
 specialite varchar(20),
-nbre_max integer
+nbre_max_heure integer
 );
 CREATE TABLE salle (
-id_salle integer PRIMARY KEY,
+id_salle integer PRIMARY KEY AUTO_INCREMENT,
 nom varchar(5) unique,
 capacite integer,
 nbr_max_aff integer
@@ -89,7 +89,17 @@ INSERT INTO affectation (id_ens, id_salle, jour, heure_deb, heure_fin, nbre_etud
 ('01234587', 11, 'mardi', 10, 12, 35),
 ('18765439', 12, 'mercredi', 15, 17, 15),
 ('07654321', 13, 'jeudi', 8, 10, 8),
-('15432678', 14, 'vendredi', 13, 15, 40);
+('15432678', 14, 'vendredi', 13, 15, 40),
+('08765432', 9, 'lundi', 10, 12, 65),
+('15432678', 9, 'mardi', 8, 10, 75),
+('09876543', 9, 'mercredi', 14, 16, 70),
+('11223344', 5, 'jeudi', 14, 16, 30), 
+('02345678', 7, 'vendredi', 10, 12, 45),
+('13245768', 9, 'jeudi', 8, 10, 60),   
+('01234587', 11, 'lundi', 13, 15, 30), 
+('18765439', 9, 'vendredi', 9, 11, 80), 
+('07654321', 13, 'mardi', 15, 17, 10),
+('14567892', 9, 'mercredi', 10, 12, 68);
 -- insert users
 INSERT INTO users (cin, nom, prenom, email, mot_de_passe, role) VALUES 
 ('09871234', 'yacoub', 'hend', 'hend.yacoub@etudiant-fst.utm.tn', 'SecurePass123', 'admin'),
