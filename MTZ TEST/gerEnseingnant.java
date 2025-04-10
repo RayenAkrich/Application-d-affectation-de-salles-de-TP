@@ -38,21 +38,21 @@ public class gerEnseignant extends javax.swing.JFrame {
         initComponents();
         loadEnseignants();
         jPanel1.setVisible(false);
-        jTable1.getSelectionModel().addListSelectionListener(e -> {
-    if (!e.getValueIsAdjusting() && jTable1.getSelectedRow() != -1) {
-        jButton3.setEnabled(true); // Supprimer
-        jButton4.setEnabled(true); // Modifier
-        int selectedRow = jTable1.getSelectedRow();
-        jTextField1.setText(jTable1.getValueAt(selectedRow, 0).toString());
-        jTextField2.setText(jTable1.getValueAt(selectedRow, 1).toString());
-        jTextField3.setText(jTable1.getValueAt(selectedRow, 2).toString());
-        jTextField4.setText(jTable1.getValueAt(selectedRow, 3).toString());
-        jTextField5.setText(jTable1.getValueAt(selectedRow, 4).toString());
+        jTable2.getSelectionModel().addListSelectionListener(e -> {
+    if (!e.getValueIsAdjusting() && jTable2.getSelectedRow() != -1) {
+        supp.setEnabled(true); // Supprimer
+        edit.setEnabled(true); // Modifier
+        int selectedRow = jTable2.getSelectedRow();
+        cin1.setText(jTable2.getValueAt(selectedRow, 0).toString());
+        nom1.setText(jTable2.getValueAt(selectedRow, 1).toString());
+        prenom1.setText(jTable2.getValueAt(selectedRow, 2).toString());
+        specialite1.setText(jTable2.getValueAt(selectedRow, 3).toString());
+        nbremax1.setText(jTable2.getValueAt(selectedRow, 4).toString());
     }
 });
     }
     private void loadEnseignants() {
-    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
     model.setRowCount(0); // Clear table first
 
     try (Connection conn = MySQLConnection.connect()) {
@@ -73,9 +73,9 @@ public class gerEnseignant extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Erreur de chargement des enseignants.");
     }
 
-    // DÃ©sactive les boutons tant qu'aucune ligne n'est sÃ©lectionnÃ©e
-    jButton3.setEnabled(false);
-    jButton4.setEnabled(false);
+    // Désactive les boutons tant qu'aucune ligne n'est sélectionnée
+    supp.setEnabled(false);
+    edit.setEnabled(false);
 }
 
 
@@ -89,7 +89,7 @@ public class gerEnseignant extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable2 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -97,19 +97,19 @@ public class gerEnseignant extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        cin1 = new javax.swing.JTextField();
+        nom1 = new javax.swing.JTextField();
+        prenom1 = new javax.swing.JTextField();
+        specialite1 = new javax.swing.JTextField();
+        nbremax1 = new javax.swing.JTextField();
+        add = new javax.swing.JButton();
+        edit = new javax.swing.JButton();
+        Ajoutpanel = new javax.swing.JButton();
+        supp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -117,7 +117,7 @@ public class gerEnseignant extends javax.swing.JFrame {
                 "cin", "nom", "prenom", "specialite", "nbre_max"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable2);
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -133,28 +133,33 @@ public class gerEnseignant extends javax.swing.JFrame {
 
         jLabel6.setText("nbre_max :");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
-
-        jTextField3.setText("jTextField3");
-
-        jTextField4.setText("jTextField4");
-
-        jTextField5.setText("jTextField5");
-
-        jButton1.setText("Ajouter");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cin1.setText("jTextField1");
+        cin1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cin1ActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Modifier");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        nom1.setText("jTextField2");
+
+        prenom1.setText("jTextField3");
+
+        specialite1.setText("jTextField4");
+
+        nbremax1.setText("jTextField5");
+
+        add.setText("Ajouter");
+        add.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                addActionPerformed(evt);
+            }
+        });
+
+        edit.setText("Modifier");
+        edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editActionPerformed(evt);
             }
         });
 
@@ -168,7 +173,7 @@ public class gerEnseignant extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(nbremax1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,19 +183,19 @@ public class gerEnseignant extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(specialite1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(prenom1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nom1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cin1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(77, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(edit)
                 .addGap(32, 32, 32))
         );
         jPanel1Layout.setVerticalGroup(
@@ -201,41 +206,41 @@ public class gerEnseignant extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(prenom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(specialite1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nbremax1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4))
+                    .addComponent(add)
+                    .addComponent(edit))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jButton2.setText(" Ajout/Modif");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Ajoutpanel.setText(" Ajout/Modif");
+        Ajoutpanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                AjoutpanelActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Supprimer");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        supp.setText("Supprimer");
+        supp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                suppActionPerformed(evt);
             }
         });
 
@@ -251,9 +256,9 @@ public class gerEnseignant extends javax.swing.JFrame {
                 .addGap(3, 3, 3))
             .addGroup(layout.createSequentialGroup()
                 .addGap(306, 306, 306)
-                .addComponent(jButton2)
+                .addComponent(Ajoutpanel)
                 .addGap(27, 27, 27)
-                .addComponent(jButton3)
+                .addComponent(supp)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -268,21 +273,21 @@ public class gerEnseignant extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(Ajoutpanel)
+                    .addComponent(supp))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>                        
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {                                    
         try {
-        int cin = Integer.parseInt(jTextField1.getText());
-        String nom = jTextField2.getText();
-        String prenom = jTextField3.getText();
-        String specialite = jTextField4.getText();
-        int nbreMax = Integer.parseInt(jTextField5.getText());
+        int cin = Integer.parseInt(cin1.getText());
+        String nom = nom1.getText();
+        String prenom = prenom1.getText();
+        String specialite = specialite1.getText();
+        int nbreMax = Integer.parseInt(nbremax1.getText());
 
         try (Connection conn = MySQLConnection.connect()) {
             String sql = "INSERT INTO enseignant (cin, nom, prenom, specialite, nbre_max) VALUES (?, ?, ?, ?, ?)";
@@ -294,9 +299,9 @@ public class gerEnseignant extends javax.swing.JFrame {
             pstmt.setInt(5, nbreMax);
 
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Enseignant ajoutÃ© avec succÃ¨s !");
+            JOptionPane.showMessageDialog(this, "Enseignant ajouté avec succès !");
             loadEnseignants(); // Recharge le tableau
-            jPanel1.setVisible(false); // Masque le formulaire aprÃ¨s ajout
+            jPanel1.setVisible(false); // Masque le formulaire après ajout
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -304,36 +309,36 @@ public class gerEnseignant extends javax.swing.JFrame {
         }
 
     } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Erreur : Veuillez vÃ©rifier les champs numÃ©riques.");
+        JOptionPane.showMessageDialog(this, "Erreur : Veuillez vérifier les champs numériques.");
     }
-    }                                        
+    }                                   
 
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void AjoutpanelActionPerformed(java.awt.event.ActionEvent evt) {                                           
     jPanel1.setVisible(true); // Affiche le formulaire
-    jTable1.clearSelection(); // DÃ©sÃ©lectionne toute ligne
-    jTextField1.setText("");
-    jTextField2.setText("");
-    jTextField3.setText("");
-    jTextField4.setText("");
-    jTextField5.setText("");
+    jTable2.clearSelection(); // Désélectionne toute ligne
+    cin1.setText("");
+    nom1.setText("");
+    prenom1.setText("");
+    specialite1.setText("");
+    nbremax1.setText("");
 
-    // DÃ©sactive modifier/supprimer si on passe en ajout
-    jButton3.setEnabled(false);
-    jButton4.setEnabled(false);
-    }                                        
+    // Désactive modifier/supprimer si on passe en ajout
+    supp.setEnabled(false);
+    edit.setEnabled(false);
+    }                                          
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void editActionPerformed(java.awt.event.ActionEvent evt) {                                     
         // TODO add your handling code here:
-         int selectedRow = jTable1.getSelectedRow();
+         int selectedRow = jTable2.getSelectedRow();
 
     if (selectedRow != -1) {
         try {
-            int cin = Integer.parseInt(jTextField1.getText());
-            String nom = jTextField2.getText();
-            String prenom = jTextField3.getText();
-            String specialite = jTextField4.getText();
-            int nbreMax = Integer.parseInt(jTextField5.getText());
+            int cin = Integer.parseInt(cin1.getText());
+            String nom = nom1.getText();
+            String prenom = prenom1.getText();
+            String specialite = specialite1.getText();
+            int nbreMax = Integer.parseInt(nbremax1.getText());
 
             try (Connection conn = MySQLConnection.connect()) {
                 String sql = "UPDATE enseignant SET nom = ?, prenom = ?, specialite = ?, nbre_max = ? WHERE cin = ?";
@@ -347,31 +352,31 @@ public class gerEnseignant extends javax.swing.JFrame {
                 int rowsAffected = pstmt.executeUpdate();
 
                 if (rowsAffected > 0) {
-                    JOptionPane.showMessageDialog(this, "Enseignant modifiÃ© avec succÃ¨s !");
+                    JOptionPane.showMessageDialog(this, "Enseignant modifié avec succès !");
                     loadEnseignants(); // recharge le tableau
                 } else {
-                    JOptionPane.showMessageDialog(this, "Aucune modification effectuÃ©e.");
+                    JOptionPane.showMessageDialog(this, "Aucune modification effectuée.");
                 }
             }
 
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Erreur de format. Veuillez vÃ©rifier les champs numÃ©riques.");
+            JOptionPane.showMessageDialog(this, "Erreur de format. Veuillez vérifier les champs numériques.");
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erreur lors de la mise Ã  jour.");
+            JOptionPane.showMessageDialog(this, "Erreur lors de la mise à jour.");
         }
     } else {
-        JOptionPane.showMessageDialog(this, "Veuillez sÃ©lectionner un enseignant Ã  modifier.");
+        JOptionPane.showMessageDialog(this, "Veuillez sélectionner un enseignant à modifier.");
     }
-    }                                        
+    }                                    
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-int selectedRow = jTable1.getSelectedRow();
+    private void suppActionPerformed(java.awt.event.ActionEvent evt) {                                     
+int selectedRow = jTable2.getSelectedRow();
 
     if (selectedRow != -1) {
         int confirm = JOptionPane.showConfirmDialog(this, "Voulez-vous vraiment supprimer cet enseignant ?", "Confirmation", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            int cin = Integer.parseInt(jTable1.getValueAt(selectedRow, 0).toString());
+            int cin = Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString());
 
             try (Connection conn = MySQLConnection.connect()) {
                 String sql = "DELETE FROM enseignant WHERE cin = ?";
@@ -379,18 +384,22 @@ int selectedRow = jTable1.getSelectedRow();
                 pstmt.setInt(1, cin);
                 pstmt.executeUpdate();
 
-                // Recharge les donnÃ©es aprÃ¨s suppression
+                // Recharge les données après suppression
                 loadEnseignants();
-                JOptionPane.showMessageDialog(this, "Enseignant supprimÃ© avec succÃ¨s !");
+                JOptionPane.showMessageDialog(this, "Enseignant supprimé avec succès !");
             } catch (SQLException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Erreur lors de la suppression.");
             }
         }
     } else {
-        JOptionPane.showMessageDialog(this, "Veuillez sÃ©lectionner un enseignant Ã  supprimer.");
+        JOptionPane.showMessageDialog(this, "Veuillez sélectionner un enseignant à supprimer.");
     }        // TODO add your handling code here:
-    }                                        
+    }                                    
+
+    private void cin1ActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        // TODO add your handling code here:
+    }                                    
 
     /**
      * @param args the command line arguments
@@ -428,10 +437,10 @@ int selectedRow = jTable1.getSelectedRow();
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton Ajoutpanel;
+    private javax.swing.JButton add;
+    private javax.swing.JTextField cin1;
+    private javax.swing.JButton edit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -440,11 +449,11 @@ int selectedRow = jTable1.getSelectedRow();
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField nbremax1;
+    private javax.swing.JTextField nom1;
+    private javax.swing.JTextField prenom1;
+    private javax.swing.JTextField specialite1;
+    private javax.swing.JButton supp;
     // End of variables declaration                   
-} 
+}
