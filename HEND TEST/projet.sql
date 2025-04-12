@@ -111,4 +111,7 @@ INSERT INTO users (cin, nom, prenom, email, mot_de_passe, role) VALUES
 ('01237654', 'Müller', 'Hans', 'h.muller@example.com', 'B3rlin2025', 'user'),
 ('18765439', 'Ivanova', 'Svetlana', 's.ivanova@example.com', 'Sib3ria!', 'user'),
 ('07654328', 'Dubois', 'Pierre', 'p.dubois@example.com', 'Paris1234', 'user'),
-('15432679', 'Rossi', 'Giulia', 'g.rossi@example.com', 'R0ma2024#', 'user');
+('15432679', 'Rossi', 'Giulia', 'g.rossi@example.com', 'R0ma2024#', 'user'),
+('18273645', 'Santiago', 'Amy', 'holt.Binders@example.com', 'fomow#', 'user'),
+('14676242', 'Boyle', 'Charles', 'foodblog.genevive@example.com', 'Thetramps*Thebachboys*99', 'user'),
+('14676243', 'Parelta', 'Jake', 'Die.Hard@example.com', 'Amy&Mac4life#', 'user');
