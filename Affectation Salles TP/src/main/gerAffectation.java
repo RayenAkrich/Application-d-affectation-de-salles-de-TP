@@ -106,8 +106,7 @@ public class gerAffectation extends javax.swing.JFrame {
             case 6: nbreEtud = newValue; break;
             default: throw new SQLException("Colonne invalide");
         }
-  System.out.println("DEBUG - Nouvelles valeurs: " + 
-                         String.join("|", idEns, idSalle, jour, heureDeb, heureFin, nbreEtud));
+         System.out.println("DEBUG - Nouvelles valeurs: " +  String.join("|", idEns, idSalle, jour, heureDeb, heureFin, nbreEtud));
         // 3. Vérifier maintenance
         String checkMaintenance = "SELECT COUNT(*) FROM maintenance WHERE num_salle = ? AND jour = ?";
         try (PreparedStatement pst = con.prepareStatement(checkMaintenance)) {
@@ -119,41 +118,41 @@ public class gerAffectation extends javax.swing.JFrame {
                 return;
             }
         }
-// 5. Vérification du nbre max d aff de la salle
-    int totalaff = 0;
-    int maxaff=0;
-    String queryQuotaSalle = "SELECT nbr_max_aff FROM salle WHERE id_salle = ?";
-try (PreparedStatement pstQuota = con.prepareStatement(queryQuotaSalle)) {
-    pstQuota.setString(1, idSalle);
-    ResultSet rsQuota = pstQuota.executeQuery();
-    if (rsQuota.next()) {
-        maxaff = rsQuota.getInt("nbr_max_aff") ; 
-    }
-}
+      // 5. Vérification du nbre max d aff de la salle
+       int totalaff = 0;
+       int maxaff=0;
+       String queryQuotaSalle = "SELECT nbr_max_aff FROM salle WHERE id_salle = ?";
+      try (PreparedStatement pstQuota = con.prepareStatement(queryQuotaSalle)) {
+          pstQuota.setString(1, idSalle);
+          ResultSet rsQuota = pstQuota.executeQuery();
+          if (rsQuota.next()) {
+              maxaff = rsQuota.getInt("nbr_max_aff") ; 
+          }
+      }
 
-// 6.2 Calculer la somme des affectations existantes (en minutes) pour cette salle et cette semaine
-String queryTotalAffectation = """
-    SELECT count(*) as total
-    FROM affectation 
-    WHERE id_salle = ?
-""";
-try (PreparedStatement pstTotal = con.prepareStatement(queryTotalAffectation)) {
-    pstTotal.setString(1, idSalle);
-    ResultSet rsTotal = pstTotal.executeQuery();
-    if (rsTotal.next()) {
-        totalaff = rsTotal.getInt("total");
-    }
-}
-
-
+      // 6.2 Calculer la somme des affectations existantes (en minutes) pour cette salle et cette semaine
+      String queryTotalAffectation = """
+          SELECT count(*) as total
+          FROM affectation 
+          WHERE id_salle = ?
+      """;
+      try (PreparedStatement pstTotal = con.prepareStatement(queryTotalAffectation)) {
+          pstTotal.setString(1, idSalle);
+          ResultSet rsTotal = pstTotal.executeQuery();
+          if (rsTotal.next()) {
+              totalaff = rsTotal.getInt("total");
+          }
+      }
 
 
-if ( totalaff+ 1 > (maxaff)) {
-    JOptionPane.showMessageDialog(this, String.format(
-        "Erreur: La salle a atteint son nombre max d'affectations (%d aff max).",
-        maxaff));
-    return;
-}
+
+      
+      if ( totalaff+ 1 > (maxaff)) {
+          JOptionPane.showMessageDialog(this, String.format(
+              "Erreur: La salle a atteint son nombre max d'affectations (%d aff max).",
+              maxaff));
+          return;
+      }
         // 4. Vérifier occupation salle (exclure l'affectation actuelle)
         String checkOccupation = """
             SELECT COUNT(*) FROM affectation 
@@ -181,29 +180,29 @@ if ( totalaff+ 1 > (maxaff)) {
             }
         }
         // 5. Vérifier quota horaire hebdomadaire (si modification concerne horaire ou jour)
-    // 3. Validation des heures
+       // 3. Validation des heures
  
         try {
             LocalTime debut, fin;
             debut = LocalTime.parse(heureDeb);
             fin = LocalTime.parse(heureFin);
             
-           LocalTime heureMin = LocalTime.of(8, 0);
-LocalTime heureMax = LocalTime.of(18, 0);
+            LocalTime heureMin = LocalTime.of(8, 0);
+            LocalTime heureMax = LocalTime.of(18, 0);
 
-if (fin.isBefore(debut)) {
-    JOptionPane.showMessageDialog(this, 
-        "L'heure de fin doit être après l'heure de début", 
-        "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
-    return;
-}
+            if (fin.isBefore(debut)) {
+                JOptionPane.showMessageDialog(this, 
+                    "L'heure de fin doit être après l'heure de début", 
+                    "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-if (debut.isBefore(heureMin) || fin.isAfter(heureMax)) {
-    JOptionPane.showMessageDialog(this, 
-        "Les horaires doivent être compris entre 08:00 et 18:00", 
-        "Heure invalide", JOptionPane.ERROR_MESSAGE);
-    return;
-}
+            if (debut.isBefore(heureMin) || fin.isAfter(heureMax)) {
+                JOptionPane.showMessageDialog(this, 
+                    "Les horaires doivent être compris entre 08:00 et 18:00", 
+                    "Heure invalide", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         } catch (DateTimeParseException e) {
             JOptionPane.showMessageDialog(this, 
                 "Format d'heure invalide (HH:MM requis)", 
@@ -212,7 +211,7 @@ if (debut.isBefore(heureMin) || fin.isAfter(heureMax)) {
         }
         
        
-// 5. Vérification de la capacité de la salle
+         // 5. Vérification de la capacité de la salle
         String checkCapaciteSalle = "SELECT capacite FROM salle WHERE id_salle = ?";
         try (PreparedStatement pst = con.prepareStatement(checkCapaciteSalle)) {
             pst.setString(1, idSalle);
@@ -233,22 +232,22 @@ if (debut.isBefore(heureMin) || fin.isAfter(heureMax)) {
             debut = LocalTime.parse(heureDeb);
             fin = LocalTime.parse(heureFin);
             
-           LocalTime heureMin = LocalTime.of(8, 0);
-LocalTime heureMax = LocalTime.of(18, 0);
+            LocalTime heureMin = LocalTime.of(8, 0);
+            LocalTime heureMax = LocalTime.of(18, 0);
 
-if (fin.isBefore(debut)) {
-    JOptionPane.showMessageDialog(this, 
-        "L'heure de fin doit être après l'heure de début", 
-        "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
-    return;
-}
+            if (fin.isBefore(debut)) {
+                JOptionPane.showMessageDialog(this, 
+                    "L'heure de fin doit être après l'heure de début", 
+                    "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-if (debut.isBefore(heureMin) || fin.isAfter(heureMax)) {
-    JOptionPane.showMessageDialog(this, 
-        "Les horaires doivent être compris entre 08:00 et 18:00", 
-        "Heure invalide", JOptionPane.ERROR_MESSAGE);
-    return;
-}
+            if (debut.isBefore(heureMin) || fin.isAfter(heureMax)) {
+                JOptionPane.showMessageDialog(this, 
+                    "Les horaires doivent être compris entre 08:00 et 18:00", 
+                    "Heure invalide", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         } catch (DateTimeParseException e) {
             JOptionPane.showMessageDialog(this, 
                 "Format d'heure invalide (HH:MM requis)", 
