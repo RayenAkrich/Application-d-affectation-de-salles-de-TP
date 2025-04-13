@@ -91,7 +91,7 @@ public class gerAffectation extends javax.swing.JFrame {
         switch (column) {
             case 1: idEns = newValue; break;
             case 2: idSalle = newValue; break;
-            case 3: jour = newValue.trim(); // Trim whitespace
+            case 3: jour = newValue.trim().toLowerCase(); // Trim whitespace
                     // Validate jour against allowed days
                     Set<String> allowedDays = Set.of("lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi");
                      if (!allowedDays.contains(jour)) {
