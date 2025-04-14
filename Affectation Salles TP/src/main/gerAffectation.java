@@ -712,16 +712,10 @@ if ( totalaff+ 1 > (quotaSalle)) {
         FROM enseignant
         WHERE cin = ?
     """;
-
     try (Connection conn = connectToDatabase();
          PreparedStatement stmt = conn.prepareStatement(query)) {
-
-        // Remplacer le ? par le CIN de l'enseignant
         stmt.setString(1,idEns);
-
-        // Exécuter la requête
         ResultSet rs = stmt.executeQuery();
-
         // Récupérer le résultat
         if (rs.next()) {
             nbre_max = (rs.getInt("nbre_max"))*60;
