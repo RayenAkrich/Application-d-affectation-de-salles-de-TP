@@ -130,7 +130,8 @@ public class gerAffectation extends javax.swing.JFrame {
           }
       }
 
-      // 6.2 Calculer la somme des affectations existantes (en minutes) pour cette salle et cette semaine
+      // 6.2 Calculer la somme des affectations existantes
+       //(en minutes) pour cette salle et cette semaine
       String queryTotalAffectation = """
           SELECT count(*) as total
           FROM affectation 
