@@ -28,7 +28,7 @@ public class gerSalle extends javax.swing.JFrame {
         this.currentCin=cin;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         initComponents();
-        loadEnseignants();
+        loadSalle();
         // Configure table header
         JTableHeader header = jTable2.getTableHeader();
         header.setPreferredSize(new Dimension(header.getWidth(), 50)); // Set header height (e.g., 50px)
@@ -207,7 +207,7 @@ public class gerSalle extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    private void loadEnseignants() {
+    private void loadSalle() {
         String query = "";
     try{
         connect();
@@ -320,7 +320,7 @@ public class gerSalle extends javax.swing.JFrame {
 
                     if (rowsAffected > 0) {
                         JOptionPane.showMessageDialog(this, "Salle modifiée avec succès !");
-                        loadEnseignants(); // recharge le tableau
+                        loadSalle(); // recharge le tableau
                     } else {
                         JOptionPane.showMessageDialog(this, "Aucune modification effectuée.");
                     }
@@ -356,7 +356,7 @@ public class gerSalle extends javax.swing.JFrame {
 
                 pstmt.executeUpdate();
                 JOptionPane.showMessageDialog(this, "salle ajouté avec succès !");
-                loadEnseignants(); // Recharge le tableau
+                loadSalle(); // Recharge le tableau
 
             } catch (SQLException e) {
                 e.printStackTrace();
