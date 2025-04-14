@@ -23,7 +23,7 @@ public class EditAccountForm extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/salle_tp", "root", "123456");
-            String query = "SELECT cin, nom, prenom, email, mot_de_passe FROM users WHERE cin = ?";
+            String query = "SELECT cin, nom, prenom, email FROM users WHERE cin = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, currentCin);
             ResultSet rs = stmt.executeQuery();
@@ -32,7 +32,6 @@ public class EditAccountForm extends javax.swing.JFrame {
                 nomTextField.setText(rs.getString("nom"));
                 prenomTextField.setText(rs.getString("prenom"));
                 emailTextField.setText(rs.getString("email"));
-                passwordField.setText(rs.getString("mot_de_passe"));
             } else {
                 JOptionPane.showMessageDialog(null, "User not found!");
             }
@@ -52,10 +51,10 @@ public class EditAccountForm extends javax.swing.JFrame {
         nomTextField = new javax.swing.JTextField();
         prenomTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
-        passwordField = new javax.swing.JPasswordField();
         doneButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
+        editMdp = new javax.swing.JButton();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,7 +64,7 @@ public class EditAccountForm extends javax.swing.JFrame {
 
         cinLabel.setForeground(new java.awt.Color(255, 51, 51));
         cinLabel.setOpaque(true);
-        getContentPane().add(cinLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, 500, 40));
+        getContentPane().add(cinLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 500, 40));
 
         nomTextField.setBorder(null);
         nomTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +72,7 @@ public class EditAccountForm extends javax.swing.JFrame {
                 nomTextFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(nomTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, 500, 40));
+        getContentPane().add(nomTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, 500, 40));
 
         prenomTextField.setBorder(null);
         prenomTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +80,7 @@ public class EditAccountForm extends javax.swing.JFrame {
                 prenomTextFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(prenomTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 500, 40));
+        getContentPane().add(prenomTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 500, 40));
 
         emailTextField.setBorder(null);
         emailTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -89,15 +88,7 @@ public class EditAccountForm extends javax.swing.JFrame {
                 emailTextFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 490, 500, 40));
-
-        passwordField.setBorder(null);
-        passwordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 590, 500, 40));
+        getContentPane().add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 560, 500, 40));
 
         doneButton.setFont(new java.awt.Font("Baskerville Old Face", 1, 36)); // NOI18N
         doneButton.setBorder(null);
@@ -136,6 +127,16 @@ public class EditAccountForm extends javax.swing.JFrame {
         });
         getContentPane().add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 720, 160, 60));
 
+        editMdp.setBorderPainted(false);
+        editMdp.setContentAreaFilled(false);
+        editMdp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editMdp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editMdpActionPerformed(evt);
+            }
+        });
+        getContentPane().add(editMdp, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 650, 180, 50));
+
         Background.setIcon(new javax.swing.ImageIcon("C:\\Users\\topto\\Downloads\\images\\EditACCOUNT.jpg")); // NOI18N
         getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 800));
 
@@ -148,7 +149,6 @@ public class EditAccountForm extends javax.swing.JFrame {
         String newNom = nomTextField.getText().trim();
         String newPrenom = prenomTextField.getText().trim();
         String newEmail = emailTextField.getText().trim();
-        String newPassword = new String(passwordField.getPassword());
     
         // ---- Validations ----
         if(!newNom.matches("^[A-Za-z\\s\\-']+$")){
@@ -161,10 +161,6 @@ public class EditAccountForm extends javax.swing.JFrame {
         }
         if(!newEmail.matches("^[\\w+.-]+@[\\w.-]+\\.[A-Za-z]{2,}$")){
             JOptionPane.showMessageDialog(null, "Email must be valid, e.g., example@domain.com");
-            return;
-        }
-        if(newPassword.length() <= 5){
-            JOptionPane.showMessageDialog(null, "Mot de passe must be more than 5 characters.");
             return;
         }
     
@@ -185,12 +181,11 @@ public class EditAccountForm extends javax.swing.JFrame {
             }
 
             // 2. Update user data
-            String updateQuery = "UPDATE users SET nom = ?, prenom = ?, email = ?, mot_de_passe = ? WHERE cin = ?";
+            String updateQuery = "UPDATE users SET nom = ?, prenom = ?, email = ? WHERE cin = ?";
             try (PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
                 updateStmt.setString(1, newNom);
                 updateStmt.setString(2, newPrenom);
                 updateStmt.setString(3, newEmail);
-                updateStmt.setString(4, newPassword);
                 updateStmt.setString(5, currentCin);
 
                 int rowsUpdated = updateStmt.executeUpdate();
@@ -218,10 +213,6 @@ public class EditAccountForm extends javax.swing.JFrame {
     private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
 
     }//GEN-LAST:event_emailTextFieldActionPerformed
-
-    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-
-    }//GEN-LAST:event_passwordFieldActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         
@@ -255,15 +246,20 @@ public class EditAccountForm extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
+    private void editMdpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMdpActionPerformed
+        new editMdp(currentCin).setVisible(true);
+            this.dispose();
+    }//GEN-LAST:event_editMdpActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
     private javax.swing.JButton backButton;
     private javax.swing.JLabel cinLabel;
     private javax.swing.JButton doneButton;
+    private javax.swing.JButton editMdp;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JButton exitButton;
     private javax.swing.JTextField nomTextField;
-    private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField prenomTextField;
     // End of variables declaration//GEN-END:variables
 }
