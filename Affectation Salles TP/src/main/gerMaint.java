@@ -140,7 +140,7 @@ try (PreparedStatement pstSalle = con.prepareStatement(checkSalle)) {
             pst.setString(1, newValue);
             pst.setString(2, idMaintenance);
             pst.executeUpdate();
-            loadMaintenance(); // Recharge ton JTable maintenance si tu en as un
+            loadMaintenance(); 
             JOptionPane.showMessageDialog(this, "Maintenance mise à jour avec succès !");
         }
     } catch (SQLException ex) {
