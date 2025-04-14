@@ -312,8 +312,8 @@ public class gerSalle extends javax.swing.JFrame {
                     String sql = "UPDATE salle SET nom = ?, capacite = ?, nbr_max_aff = ? WHERE id_salle = ?";
                     PreparedStatement pstmt = con.prepareStatement(sql);
                     pstmt.setString(1, nom); 
-                    pstmt.setInt(2, capacite); // Should be capacite (integer)
-                    pstmt.setInt(3, specialite); // Should be maxAff (integer)
+                    pstmt.setInt(2, capacite);
+                    pstmt.setInt(3, specialite); 
                     pstmt.setInt(4, id);
                     
                     int rowsAffected = pstmt.executeUpdate();
