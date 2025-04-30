@@ -1,7 +1,8 @@
-University project in Java & PL/SQL for managing TP room assignments: CRUD for rooms/teachers, <br/> 
-weekly assignment limits, maintenance days, and room availability. Lets users view schedules,<br/>
-teacher room use, free rooms by day, and the most-used room. Includes a procedure to check room availability by date, <br/> 
-time, and student count.<br/>
+Projet universitaire en Java et PL/SQL pour la gestion des affectations de salles de cours : <br/>
+CRUD pour les salles/enseignants, limites d'affectation hebdomadaires, jours de maintenance et disponibilité des salles.<br/>
+Permet aux utilisateurs de consulter les plannings, l'utilisation des salles par enseignant, les salles libres <br/>
+par jour et la salle la plus utilisée. Comprend une procédure pour vérifier la disponibilité des salles<br/>
+par date, heure et nombre d'étudiants.<br/>
 Cette application permet : <br/>
 1. L’ajout, la modification ou la suppression de salles et d’enseignants.<br/>
 2. La gestion d’affectations, avec un nombre d’affectations maximum (par semaine) et des jours de<br/>
