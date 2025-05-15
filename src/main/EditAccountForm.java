@@ -192,7 +192,7 @@ public class EditAccountForm extends javax.swing.JFrame {
                 updateStmt.setString(1, newNom);
                 updateStmt.setString(2, newPrenom);
                 updateStmt.setString(3, newEmail);
-                updateStmt.setString(4, currentCin); // Correction: index 4 au lieu de 5
+                updateStmt.setString(4, currentCin); 
 
                 int rowsUpdated = updateStmt.executeUpdate();
                 if (rowsUpdated > 0) {
