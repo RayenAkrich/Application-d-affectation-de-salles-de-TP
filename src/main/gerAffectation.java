@@ -77,6 +77,8 @@ public class gerAffectation extends javax.swing.JFrame {
             return;
         }
         
+        
+        
         // 2. Préparer les nouvelles valeurs
         String idEns = rs.getString("id_ens");
         String idSalle = rs.getString("id_salle");
@@ -86,7 +88,30 @@ public class gerAffectation extends javax.swing.JFrame {
         String nbreEtud = rs.getString("nbre_etud");
         System.out.println("DEBUG - Valeurs actuelles: " + 
                          String.join("|", idEns, idSalle, jour, heureDeb, heureFin, nbreEtud));
-        
+        String checkEnseignantOccupation = """
+    SELECT COUNT(*) FROM affectation 
+    WHERE id_ens = ? AND jour = ? AND id_affect != ?
+    AND (
+        (? BETWEEN heure_deb AND heure_fin) 
+        OR (? BETWEEN heure_deb AND heure_fin)
+        OR (heure_deb BETWEEN ? AND ?)
+    )""";
+try (PreparedStatement pstEnsOcc = con.prepareStatement(checkEnseignantOccupation)) {
+    pstEnsOcc.setString(1, idEns);
+    pstEnsOcc.setString(2, jour);
+    pstEnsOcc.setString(3, idAffectation);
+    pstEnsOcc.setString(4, heureDeb);
+    pstEnsOcc.setString(5, heureFin);
+    pstEnsOcc.setString(6, heureDeb);
+    pstEnsOcc.setString(7, heureFin);
+    ResultSet rsEnsOcc = pstEnsOcc.executeQuery();
+    if (rsEnsOcc.next() && rsEnsOcc.getInt(1) > 0) {
+        JOptionPane.showMessageDialog(this, 
+            "Erreur: L'enseignant a déjà une autre affectation pendant ce créneau", 
+            "Conflit d'emploi du temps", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+}
         // Mettre à jour la valeur modifiée
         switch (column) {
             case 1: idEns = newValue; break;
@@ -180,7 +205,7 @@ if ( totalaff+ 1 > (maxaff)) {
                 return;
             }
         }
-        // 5. Vérifier quota horaire hebdomadaire (si modification concerne horaire ou jour)
+     
     // 3. Validation des heures
  
         try {
@@ -552,13 +577,20 @@ private void editAffectation() {
 
     private void btnokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnokActionPerformed
                                                  
-    try {
+       try {
         String idEns = jTextField1.getText();
         String idSalle = jTextField2.getText();
         String jour = (String) jComboBox1.getSelectedItem();
         String heureDeb = jTextField3.getText();
         String heureFin = jTextField5.getText();
         int nbreEtud = Integer.parseInt(jTextField6.getText());
+
+        // Add check for positive nbreEtud
+        if (nbreEtud <= 0) {
+            JOptionPane.showMessageDialog(this, "Erreur: Le nombre d'étudiants doit être positif", 
+                "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         LocalTime debut = LocalTime.parse(heureDeb);
         LocalTime fin = LocalTime.parse(heureFin);
@@ -700,7 +732,30 @@ if ( totalaff+ 1 > (quotaSalle)) {
                     return;
                 }
             }
-
+String checkEnseignantOccupation = """
+    SELECT COUNT(*) FROM affectation 
+    WHERE id_ens = ? AND jour = ? 
+    AND (
+        (? BETWEEN heure_deb AND heure_fin) 
+        OR (? BETWEEN heure_deb AND heure_fin)
+        OR (heure_deb BETWEEN ? AND ?)
+    )""";
+try (PreparedStatement pstEnsOcc = con.prepareStatement(checkEnseignantOccupation)) {
+    pstEnsOcc.setString(1, idEns);
+    pstEnsOcc.setString(2, jour);
+    pstEnsOcc.setString(3, heureDeb);
+    pstEnsOcc.setString(4, heureFin);
+    pstEnsOcc.setString(5, heureDeb);
+    pstEnsOcc.setString(6, heureFin);
+    ResultSet rsEnsOcc = pstEnsOcc.executeQuery();
+    rsEnsOcc.next();
+    if (rsEnsOcc.getInt(1) > 0) {
+        JOptionPane.showMessageDialog(this, 
+            "Erreur: L'enseignant a déjà une affectation pendant ce créneau", 
+            "Conflit d'emploi du temps", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+}
             // 4. Vérifier quota horaire enseignant
             int nbre_max = 0;
             int nbre_sem=getNbMinutesEnseignees(idEns)+(int)ChronoUnit.MINUTES.between(debut, fin);

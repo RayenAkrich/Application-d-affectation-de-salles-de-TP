@@ -184,8 +184,8 @@ private void loadMaintenance() {
             PreparedStatement pst = con.prepareStatement("DELETE FROM maintenance WHERE id_maint = ?");
             pst.setString(1, idMaintenance);
             pst.executeUpdate();
-            loadMaintenance();  // Recharger les affectations après la suppression
-              JOptionPane.showMessageDialog(this, "Affectation supprimée avec succès !");
+            loadMaintenance();  
+              JOptionPane.showMessageDialog(this, "Maintenance supprimée avec succès !");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Erreur lors de la suppression : " + ex.getMessage());
         }
@@ -237,6 +237,11 @@ private void loadMaintenance() {
         btndelete.setBorderPainted(false);
         btndelete.setContentAreaFilled(false);
         btndelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteActionPerformed(evt);
+            }
+        });
         getContentPane().add(btndelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 580, 190, 70));
 
         jPanel1.setOpaque(false);
@@ -400,6 +405,10 @@ private void loadMaintenance() {
         new Sign_in().setVisible(true);
         dispose();
     }//GEN-LAST:event_deconnecterButtonActionPerformed
+
+    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btndeleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;

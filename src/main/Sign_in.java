@@ -111,7 +111,7 @@ public class Sign_in extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    private String[] authenticateUser(String email, String password) {  // Return array [role, cin]
+    private String[] authenticateUser(String email, String password) {  
         connect();
         String query = "SELECT role, cin FROM users WHERE email = ? AND mot_de_passe = ?";
         try {
