@@ -11,12 +11,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.JFrame;
 
-public class AfficherAffectations extends javax.swing.JFrame {
+public class AfficherSalles extends javax.swing.JFrame {
 
     private String currentCin;
     private Connection conn;
     
-    public AfficherAffectations(String Cin) {
+    public AfficherSalles(String Cin) {
         initComponents();
         
         // Configure table header
